@@ -39,18 +39,17 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
 
-    - name: Make gradlew executable
+    - name: Create Gradle wrapper
       run: |
         mkdir -p gradle/wrapper
-        echo "distributionBase=GRADLE_USER_HOME
-distributionPath=wrapper/dists
-distributionUrl=https\://services.gradle.org/distributions/gradle-8.2-bin.zip
-zipStoreBase=GRADLE_USER_HOME
-zipStorePath=wrapper/dists" > gradle/wrapper/gradle-wrapper.properties
+        echo "distributionBase=GRADLE_USER_HOME" > gradle/wrapper/gradle-wrapper.properties
+        echo "distributionPath=wrapper/dists" >> gradle/wrapper/gradle-wrapper.properties
+        echo "distributionUrl=https://services.gradle.org/distributions/gradle-8.2-bin.zip" >> gradle/wrapper/gradle-wrapper.properties
+        echo "zipStoreBase=GRADLE_USER_HOME" >> gradle/wrapper/gradle-wrapper.properties
+        echo "zipStorePath=wrapper/dists" >> gradle/wrapper/gradle-wrapper.properties
 
     - name: Build Debug APK
-      run: |
-        gradle assembleDebug --stacktrace
+      run: gradle assembleDebug --stacktrace
 
     - name: Verify APK
       run: |
@@ -82,7 +81,7 @@ zipStorePath=wrapper/dists" > gradle/wrapper/gradle-wrapper.properties
           - Back button navigation
           - App cache enabled
 
-          To customize: Edit `TARGET_URL` in MainActivity.kt
+          To customize: Edit TARGET_URL in MainActivity.kt
         token: ${{ secrets.GITHUB_TOKEN }}
         allowUpdates: true
         replacesArtifacts: true
