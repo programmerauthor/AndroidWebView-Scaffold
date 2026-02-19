@@ -38,9 +38,9 @@ class MainActivity : AppCompatActivity() {
     private val TAG = "WebViewApp"
 
     // CONFIG: Change this to your target URL
-    companion object {
-        const val TARGET_URL = "https://example.com"
-    }
+    private val TARGET_URL = "https://example.com"
+    private val PERMISSION_REQUEST_CODE = 100
+    private val FILE_CHOOSER_RESULT_CODE = 101
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,7 +76,6 @@ class MainActivity : AppCompatActivity() {
             javaScriptEnabled = true
             domStorageEnabled = true
             databaseEnabled = true
-            setAppCacheEnabled(true)
 
             // Cache
             cacheMode = WebSettings.LOAD_DEFAULT
@@ -237,10 +236,5 @@ class MainActivity : AppCompatActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         webView.restoreState(savedInstanceState)
-    }
-
-    companion object {
-        private const val PERMISSION_REQUEST_CODE = 100
-        private const val FILE_CHOOSER_RESULT_CODE = 101
     }
 }
